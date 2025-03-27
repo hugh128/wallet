@@ -1,14 +1,23 @@
-import { View, Text, StyleSheet, TouchableOpacity, Switch, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Switch, Image, TextInput } from 'react-native'; // Importa TextInput
 import { useRouter } from 'expo-router';
 import { Bell, Vibrate, Volume2 } from 'lucide-react-native';
+import React, { useState } from 'react';
 
 export default function SettingsScreen() {
   const router = useRouter();
 
+  // Estados para los switches
+  const [notifications, setNotifications] = useState(true);
+  const [sounds, setSounds] = useState(true);
+  const [vibration, setVibration] = useState(true);
+
+  // Estado para la distancia de alerta
+  const [distance, setDistance] = useState('10'); // valor inicial
+
   return (
     <View style={styles.container}>
       <Image
-        source={{ uri: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800' }}
+        source={{ uri: 'https://images.unsplash.com/photo-1557683304-673a23048d34?q=80&w=1700&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }}
         style={styles.backgroundImage}
       />
       <View style={styles.overlay}>
@@ -25,8 +34,8 @@ export default function SettingsScreen() {
               trackColor={{ false: '#767577', true: '#FF6B6B' }}
               thumbColor="#fff"
               ios_backgroundColor="#3e3e3e"
-              value={true}
-              onValueChange={() => {}}
+              value={notifications} // Estado de Notificaciones
+              onValueChange={(value) => setNotifications(value)} // Actualiza el estado
             />
           </View>
           <View style={styles.settingItem}>
@@ -38,8 +47,8 @@ export default function SettingsScreen() {
               trackColor={{ false: '#767577', true: '#FF6B6B' }}
               thumbColor="#fff"
               ios_backgroundColor="#3e3e3e"
-              value={true}
-              onValueChange={() => {}}
+              value={sounds} // Estado de Sonidos
+              onValueChange={(value) => setSounds(value)} // Actualiza el estado
             />
           </View>
           <View style={styles.settingItem}>
@@ -51,8 +60,8 @@ export default function SettingsScreen() {
               trackColor={{ false: '#767577', true: '#FF6B6B' }}
               thumbColor="#fff"
               ios_backgroundColor="#3e3e3e"
-              value={true}
-              onValueChange={() => {}}
+              value={vibration} // Estado de Vibración
+              onValueChange={(value) => setVibration(value)} // Actualiza el estado
             />
           </View>
         </View>
@@ -60,7 +69,13 @@ export default function SettingsScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Distancia de Alerta</Text>
           <View style={styles.settingItem}>
-            <Text style={styles.settingText}>10 metros</Text>
+            {/* Aquí cambiamos el Text por un TextInput */}
+            <TextInput
+              style={styles.input}
+              value={distance}
+              onChangeText={setDistance} // Actualiza el estado cuando el texto cambia
+              keyboardType="numeric" // Solo permite ingresar números
+            />
           </View>
         </View>
 
@@ -126,6 +141,16 @@ const styles = StyleSheet.create({
     color: '#fff',
     marginLeft: 15,
     opacity: 0.9,
+  },
+  input: {
+    height: 40,
+    borderColor: '#FF6B6B',
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingLeft: 10,
+    color: '#fff',
+    width: '100%',
+    backgroundColor: '#333', // Fondo oscuro para el campo de texto
   },
   logoutButton: {
     backgroundColor: '#FF6B6B',

@@ -25,17 +25,17 @@ export default function WalletScreen() {
       const newDistance = Math.random() * 20;
       setDistance(newDistance);
       
-      if (isEnabled && newDistance > 10) {
+/*       if (isEnabled && newDistance > 10) {
         sendNotification();
-      }
-    }, 5000);
+      } */
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [isEnabled]);
 
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
-  const sendNotification = async () => {
+/*   const sendNotification = async () => {
     await Notifications.scheduleNotificationAsync({
       content: {
         title: "¡Alerta de Billetera!",
@@ -44,7 +44,7 @@ export default function WalletScreen() {
       },
       trigger: null,
     });
-  };
+  }; */
 
   const getStatusColor = () => {
     if (!isEnabled) return '#999';
