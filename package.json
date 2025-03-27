@@ -2,7 +2,7 @@
   "name": "wallet-tracker",
   "main": "expo-router/entry",
   "version": "1.0.0",
-  "homepage": "https://github.com/hugh128/wallet-tracker",
+  "homepage": "https://github.com/hugh128/wallet",
   "private": true,
   "scripts": {
     "dev": "cross-env EXPO_NO_TELEMETRY=1 expo start",
